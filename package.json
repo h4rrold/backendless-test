@@ -2,6 +2,7 @@
   "name": "backendless-test",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://gitname.github.io/backendless-test",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
@@ -17,7 +18,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\""
+    "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\"",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -38,6 +41,7 @@
     ]
   },
   "devDependencies": {
+    "gh-pages": "^3.1.0",
     "prettier": "^2.2.1"
   }
 }
