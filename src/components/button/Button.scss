@@ -1,0 +1,32 @@
+@import '../../assets/scss/variables.scss';
+
+.button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #000;
+  background-color: #fff;
+  &-clear {
+    background-color: $dark-grey;
+  }
+
+  &-backspace {
+    position: relative;
+    &::before {
+      position: absolute;
+      transform: translateY(-50%);
+      top: 50%;
+      width: 24px;
+      display: inline-block;
+      height: 24px;
+      content: '';
+      background: url('../../assets/icons/backspace.svg') no-repeat top center / contain;
+    }
+  }
+  &-equal {
+    background-color: $orange;
+  }
+  &-operation {
+    border-color: $orange;
+  }
+}

@@ -1,0 +1,38 @@
+@import '../../assets/scss/variables.scss';
+
+$templates-areas: a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t;
+$list-length: length($templates-areas);
+
+.calculator {
+  padding: 25px;
+  background-color: $light-blue;
+
+  &-display {
+    margin-bottom: 24px;
+  }
+
+  .numpad {
+    display: grid;
+
+    grid-gap: 10px;
+    grid-template-areas:
+      'a b c d'
+      'e f g h'
+      'i j k l'
+      'm n o p'
+      'q r s s';
+
+    @for $i from 1 through $list-length {
+      $template: nth($templates-areas, $i);
+      button:nth-child(#{$i}) {
+        grid-area: $template;
+      }
+    }
+    & > button {
+      width: 100%;
+      min-width: 68px;
+      height: 70px;
+      padding: 0;
+    }
+  }
+}
