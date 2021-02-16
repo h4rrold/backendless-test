@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import Display from '../display';
 import Button from '../button';
 import { MAX_NUM_LENGTH } from '../../utils/constants';
-import { formatOutputValue } from '../../utils/format';
+import { formatOutputValue, formatNumer } from '../../utils/format';
+import { performCalculation } from '../../utils/services/calculation';
 import './Calculator.scss';
 
 export const Calculator = () => {
@@ -13,8 +14,7 @@ export const Calculator = () => {
 
   const handleNumButtonClick = (_, num) => {
     if (!firstOperand || !operation) {
-      firstOperand.length < MAX_NUM_LENGTH &&
-        setFirstOperand(String(parseFloat(firstOperand + num)));
+      firstOperand.length < MAX_NUM_LENGTH && setFirstOperand(formatNumer(firstOperand + num));
       return;
     }
     if (isError) {
@@ -22,7 +22,7 @@ export const Calculator = () => {
     }
     const second = secondOperand ?? '0';
     if (second.length < MAX_NUM_LENGTH) {
-      setSecondOperand(String(parseFloat(second + num)));
+      setSecondOperand(formatNumer(second + num));
     }
   };
 
@@ -66,9 +66,11 @@ export const Calculator = () => {
     setOperation(null);
     setSecondOperand(null);
 
-    const result = performCalculation();
+    const result = performCalculation(firstOperand, operation, secondOperand, () => {
+      setIsError(true);
+    });
     if (result) {
-      setFirstOperand(String(formatOutputValue(result)));
+      setFirstOperand(formatOutputValue(result));
     }
   };
 
@@ -78,6 +80,7 @@ export const Calculator = () => {
     } else if (secondOperand && !secondOperand.includes('.')) {
       setSecondOperand(secondOperand + '.');
     }
+
     if (isError) {
       setIsError(false);
     }
@@ -85,43 +88,11 @@ export const Calculator = () => {
 
   const handlePercentButton = () => {
     if (!secondOperand) {
-      setFirstOperand(String(firstOperand / 100));
+      setFirstOperand(formatNumer(firstOperand / 100));
       setOperation(null);
       return;
     }
     setSecondOperand(secondOperand + '%');
-  };
-
-  const performCalculation = () => {
-    if (!firstOperand || !operation || !secondOperand) {
-      return;
-    }
-
-    let curOper = +firstOperand,
-      prevOper = null;
-
-    if (secondOperand.includes('%')) {
-      prevOper = (parseFloat(secondOperand) * curOper) / 100;
-    } else {
-      prevOper = +secondOperand;
-    }
-
-    switch (operation) {
-      case '+':
-        return curOper + prevOper;
-      case '-':
-        return curOper - prevOper;
-      case '*':
-        return curOper * prevOper;
-      case '/':
-        if (prevOper === 0) {
-          setIsError(true);
-          return;
-        }
-        return curOper / prevOper;
-      default:
-        return 0;
-    }
   };
 
   return (
@@ -130,29 +101,35 @@ export const Calculator = () => {
         firstOperand={firstOperand}
         secondOperand={secondOperand}
         operation={operation}
-        getResult={() => formatOutputValue(performCalculation())}
+        getResult={() =>
+          formatOutputValue(
+            performCalculation(firstOperand, operation, secondOperand, () => {
+              setIsError(true);
+            })
+          )
+        }
         isError={isError}
       />
       <div className="numpad">
-        <Button value="AC" type="clear" onClick={handleClearButton} />
-        <Button value={null} type="backspace" onClick={handleBackspaceButton} />
-        <Button value="%" type="common" onClick={handlePercentButton} />
-        <Button value="/" type="operation" onClick={handleOperationClick} />
-        <Button value="7" type="common" onClick={handleNumButtonClick} />
-        <Button value="8" type="common" onClick={handleNumButtonClick} />
-        <Button value="9" type="common" onClick={handleNumButtonClick} />
-        <Button value="*" type="operation" onClick={handleOperationClick} />
-        <Button value="4" type="common" onClick={handleNumButtonClick} />
-        <Button value="5" type="common" onClick={handleNumButtonClick} />
-        <Button value="6" type="common" onClick={handleNumButtonClick} />
-        <Button value="-" type="operation" onClick={handleOperationClick} />
-        <Button value="1" type="common" onClick={handleNumButtonClick} />
-        <Button value="2" type="common" onClick={handleNumButtonClick} />
-        <Button value="3" type="common" onClick={handleNumButtonClick} />
-        <Button value="+" type="operation" onClick={handleOperationClick} />
-        <Button value="." type="operation" onClick={handleDecimalButton} />
-        <Button value="0" type="common" onClick={handleNumButtonClick} />
-        <Button value="=" type="equal" onClick={handleEqualButton} />
+        <Button value="AC" className="clear" onClick={handleClearButton} />
+        <Button value={null} className="backspace" onClick={handleBackspaceButton} />
+        <Button value="%" className="common" onClick={handlePercentButton} />
+        <Button value="/" className="operation" onClick={handleOperationClick} />
+        <Button value="7" className="common" onClick={handleNumButtonClick} />
+        <Button value="8" className="common" onClick={handleNumButtonClick} />
+        <Button value="9" className="common" onClick={handleNumButtonClick} />
+        <Button value="*" className="operation" onClick={handleOperationClick} />
+        <Button value="4" className="common" onClick={handleNumButtonClick} />
+        <Button value="5" className="common" onClick={handleNumButtonClick} />
+        <Button value="6" className="common" onClick={handleNumButtonClick} />
+        <Button value="-" className="operation" onClick={handleOperationClick} />
+        <Button value="1" className="common" onClick={handleNumButtonClick} />
+        <Button value="2" className="common" onClick={handleNumButtonClick} />
+        <Button value="3" className="common" onClick={handleNumButtonClick} />
+        <Button value="+" className="operation" onClick={handleOperationClick} />
+        <Button value="." className="operation" onClick={handleDecimalButton} />
+        <Button value="0" className="common" onClick={handleNumButtonClick} />
+        <Button value="=" className="equal" onClick={handleEqualButton} />
       </div>
     </div>
   );

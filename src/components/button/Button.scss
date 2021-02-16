@@ -6,11 +6,11 @@
   align-items: center;
   border: 1px solid #000;
   background-color: #fff;
-  &-clear {
+  &.clear {
     background-color: $dark-grey;
   }
 
-  &-backspace {
+  &.backspace {
     position: relative;
     &::before {
       position: absolute;
@@ -23,10 +23,10 @@
       background: url('../../assets/icons/backspace.svg') no-repeat top center / contain;
     }
   }
-  &-equal {
+  &.equal {
     background-color: $orange;
   }
-  &-operation {
+  &.operation {
     border-color: $orange;
   }
 }

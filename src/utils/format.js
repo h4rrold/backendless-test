@@ -6,3 +6,5 @@ export const formatOutputValue = (value) => {
       })
     : null;
 };
+
+export const formatNumer = (num) => String(parseFloat(num));
