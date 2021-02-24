@@ -37,8 +37,9 @@ export const Calculator = () => {
     if (isError) {
       setIsError(false);
     }
+
     if (secondOperand) {
-      setSecondOperand(null);
+      setSecondOperand(secondOperand.slice(0, secondOperand.length - 1));
       return;
     }
     if (operation) {
@@ -46,7 +47,16 @@ export const Calculator = () => {
       return;
     }
 
-    setFirstOperand('0');
+    if (firstOperand === '0') {
+      return;
+    }
+
+    if (firstOperand.length === 1) {
+      setFirstOperand('0');
+      return;
+    }
+
+    setFirstOperand(firstOperand.slice(0, firstOperand.length - 1));
   };
 
   const handleClearButton = () => {
@@ -92,7 +102,9 @@ export const Calculator = () => {
       setOperation(null);
       return;
     }
-    setSecondOperand(secondOperand + '%');
+    if (!secondOperand.includes('%')) {
+      setSecondOperand(secondOperand + '%');
+    }
   };
 
   return (
