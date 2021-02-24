@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/backendless-test/static/css/main.08664a14.chunk.css",
-    "main.js": "/backendless-test/static/js/main.825c956f.chunk.js",
-    "main.js.map": "/backendless-test/static/js/main.825c956f.chunk.js.map",
+    "main.css": "/backendless-test/static/css/main.80a50a97.chunk.css",
+    "main.js": "/backendless-test/static/js/main.3d848947.chunk.js",
+    "main.js.map": "/backendless-test/static/js/main.3d848947.chunk.js.map",
     "runtime-main.js": "/backendless-test/static/js/runtime-main.21737a57.js",
     "runtime-main.js.map": "/backendless-test/static/js/runtime-main.21737a57.js.map",
     "static/js/2.123d8fb5.chunk.js": "/backendless-test/static/js/2.123d8fb5.chunk.js",
     "static/js/2.123d8fb5.chunk.js.map": "/backendless-test/static/js/2.123d8fb5.chunk.js.map",
     "index.html": "/backendless-test/index.html",
-    "static/css/main.08664a14.chunk.css.map": "/backendless-test/static/css/main.08664a14.chunk.css.map",
+    "static/css/main.80a50a97.chunk.css.map": "/backendless-test/static/css/main.80a50a97.chunk.css.map",
     "static/js/2.123d8fb5.chunk.js.LICENSE.txt": "/backendless-test/static/js/2.123d8fb5.chunk.js.LICENSE.txt",
     "static/media/Button.scss": "/backendless-test/static/media/backspace.17291559.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.21737a57.js",
     "static/js/2.123d8fb5.chunk.js",
-    "static/css/main.08664a14.chunk.css",
-    "static/js/main.825c956f.chunk.js"
+    "static/css/main.80a50a97.chunk.css",
+    "static/js/main.3d848947.chunk.js"
   ]
 }
